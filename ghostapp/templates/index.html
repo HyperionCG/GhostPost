@@ -1,0 +1,24 @@
+<h1>Ghost Post</h1>
+
+<a href="/" class="button">All</a>
+<a href="boastview/" class="button">Boast</a>
+<a href="roastview/" class="button">Roast</a>
+<a href="sortview/" class="button">Submission</a>
+
+{% for foo in data %}
+    {{ foo.text }}
+    {{ foo.upvote }}
+    {{ foo.downvotes }}
+    <form action="upvote/<int:post_id>/" method="post">
+        {%csrf_token%}
+        {{ form.as_p }}
+        <input type="submit" value="Submit!">
+    </form>
+    <form action="downvote/<int:post_id>/" method="post">
+        {%csrf_token%}
+        {{ form.as_p }}
+        <input type="submit" value="Submit!">
+    </form>
+{% endfor %}
+
+<a href="submit_page.html/">Post a Boast or Roast!!!</a>
