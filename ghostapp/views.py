@@ -14,10 +14,11 @@ def post_view(request):
         if form.is_valid():
             data = form.cleaned_data
             VoteChoice.objects.create(
-                choice =data['choice'],
-                text =data['text']
+                choice=data['choice'],
+                text=data['text'],
             )
         return HttpResponseRedirect(reverse('homepage'))
+
     form = VoteChoiceForm()
     return render(request, 'submit_page.html', {'form': form})
     
@@ -31,14 +32,14 @@ def roast_view(request):
     return render(request, 'index.html', {'data': data})
 
 
-def upvote_view(request, post_id):
-    post = VoteChoice.objects.get(id=post_id)
+def upvote_view(request, id):
+    post = VoteChoice.objects.get(id=id)
     post.upvotes += 1
     post.save()
     return HttpResponseRedirect(reverse('homepage'))
 
-def downvote_view(request, post_id):
-    post = VoteChoice.objects.get(id=post_id)
+def downvote_view(request, id):
+    post = VoteChoice.objects.get(id=id)
     post.downvotes += 1
     post.save()
     return HttpResponseRedirect(reverse('homepage'))

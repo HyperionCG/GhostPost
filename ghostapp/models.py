@@ -13,9 +13,9 @@ One model to represent both boasts and roasts
 """
 
 class VoteChoice(models.Model):
-    choice = models.BooleanField(default=True)
+    choice = models.BooleanField(default=False)
     text = models.CharField(max_length=280)
-    time = models.DateTimeField(timezone.now)
+    time = models.DateTimeField(default=timezone.now)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
 
