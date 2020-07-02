@@ -44,5 +44,10 @@ def downvote_view(request, id):
     post.save()
     return HttpResponseRedirect(reverse('homepage'))
 
-def sort_view(request):
-    return HttpResponseRedirect(reverse('homepage'))
+def highvote_view(request):
+    data = VoteChoice.objects.order_by('-upvotes')
+    return render(request, 'index.html', {'data': data})
+
+def lowvote_view(request):
+    data = VoteChoice.objects.order_by('upvotes')
+    return render(request, 'index.html', {'data': data})
